@@ -24,7 +24,7 @@ class User(Base):
     email = Column(String(200), unique=True, nullable=False)
     
     #One to many relationship
-    orders = relationship('Order', back_populates='users')
+    orders = relationship('Order', back_populates='user')
 
 class Product(Base):
     __tablename__ = 'products'
@@ -35,7 +35,7 @@ class Product(Base):
     
 
     #Creates a many to many relationship -->> Corrected to one to many, removed secondary=user_product
-    orders = relationship('Order', back_populates='products')
+    orders = relationship('Order', back_populates='product')
 
 class Order(Base):
     __tablename__= 'orders'
@@ -45,7 +45,7 @@ class Order(Base):
     product_id = Column(Integer, ForeignKey='products.id')
     quantity = Column(Integer, nullable=False)
     is_shipped = Column(Boolean, default=True)
-    
+
     #Creates a many to many relationship -->> Only need a one to many relationship updated to reflect this
     product = relationship('Product', back_populates='orders')
     user = relationship('User', back_populates='orders')
