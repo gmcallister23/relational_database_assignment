@@ -67,8 +67,8 @@ session.commit()
 # product = session.query(Product).filter_by(name='Widget').first() #not necessary
 
 new_order = Order(
-    user = user,
-    product = product,
+    user = user1,
+    product = product1,
     quantity=3,
     is_shipped=False
 )
