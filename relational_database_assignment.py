@@ -50,4 +50,6 @@ class Order(Base):
     product = relationship('Product', back_populates='orders')
     user = relationship('User', back_populates='orders')
 
+Base.metadata.create_all(engine)
+
 session = Session()
