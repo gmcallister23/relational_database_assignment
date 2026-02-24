@@ -53,23 +53,25 @@ Base.metadata.create_all(engine)
 
 session = Session()
 
+
+
 user1 = User(name='Lanae', email='naenae@example.com')
 user2 = User(name='Riley', email='ridawg@example.com')
 product1 = Product(name='Ball', price = 50)
 product2 = Product(name='Claw', price = 150)
 product3 = Product(name='Widget', price = 100)
 
-# old_user = session.query(User).filter_by(email='naenae@example.com').first()
-# if old_user:
-#     session.delete(old_user)
-#     session.commit()
-#     # session.expunge(old_user)
+old_user = session.query(User).filter_by(email='naenae@example.com').first()
+if old_user:
+    session.delete(old_user)
+    session.commit()
+    #session.expunge(old_user)
 
 
 # ##Un comment to add user back in, then re-comment out so you can delete them
-# user1 = User(name='Lanae', email='naenae@example.com')
-# session.add(user1)
-# session.commit()
+user1 = User(id=1, name='Lanae', email='naenae@example.com')
+session.add(user1)
+session.commit()
 
 #Adds users and products to the database -->> comment out after initial commit so you don't duplicate
 # session.add_all([user1, user2, product1, product2, product3]) #Must wrap all items in a bracket
@@ -100,50 +102,50 @@ order4 = Order(user_id=2, product_id=3, quantity=1, is_shipped=True)
 
 #Retreive users and print their information
 
-# users = session.query(User).all()
+users = session.query(User).all()
 
-# for user in users:
-#     print(user.name, user.email)
+for user in users:
+    print(user.name, user.email)
 
-# products = session.query(Product).all()
+products = session.query(Product).all()
 
-# for product in products:
-#     print(product.name, product.price)
+for product in products:
+    print(product.name, product.price)
 
-# orders = session.query(Order).all()
+orders = session.query(Order).all()
 
-# for order in orders:
-#     print(order.user.name, order.product.name, order.quantity) #added order.x.x so the statements would print correctly
+for order in orders:
+    print(order.user.name, order.product.name, order.quantity) #added order.x.x so the statements would print correctly
 
-#Updating a price
+#Updating a price - enter a different price each time you run the code
 
-# product = session.query(Product).filter_by(name='Widget').first()
-# product.price = 120
-# session.commit()
+product = session.query(Product).filter_by(name='Widget').first()
+product.price = 120
+session.commit()
 
-# for product in products:
-#     print(product.name, product.price)
+for product in products:
+    print(product.name, product.price)
 
-# #Deleting a user by id
-# user = session.query(User).filter_by(id=1).first()
+# # # #Deleting a user by id - this works for single use purposes
+# # user = session.query(User).filter_by(id=1).first()
 
-# if user:
-#     session.delete(user)
-#     session.commit()
-#     print(f'User {user.name} deleted')
-# else:
-#     print('User not found')
+# # if user:
+# #     session.delete(user)
+# #     session.commit()
+# #     print(f'User {user.name} deleted')
+# # else:
+# #     print('User not found')
 
-#Delete the 'old' user to get rid of the email
+# #Delete the 'old' user to get rid of the email
 
-# old_user = session.query(User).filter_by(email='naenae@example.com').first()
-# if old_user:
-#     session.delete(old_user)
-#     session.commit()
-#     session.expunge(old_user)
+# # old_user = session.query(User).filter_by(email='naenae@example.com').first()
+# # if old_user:
+# #     session.delete(old_user)
+# #     session.commit()
+# #     session.expunge(old_user)
 
 
-# ##Un comment to add user back in, then re-comment out so you can delete them
-# user1 = User(name='Lanae', email='naenae@example.com')
-# session.add(user1)
-# session.commit()
+# # # ##Un comment to add user back in, then re-comment out so you can delete them
+# # user1 = User(name='Lanae', email='naenae@example.com')
+# # session.add(user1)
+# # session.commit()
