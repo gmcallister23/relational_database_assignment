@@ -103,5 +103,26 @@ orders = session.query(Order).all()
 for order in orders:
     print(order.user.name, order.product.name, order.quantity) #added order.x.x so the statements would print correctly
 
+#Updating a price
 
+product = session.query(Product).filter_by(name='Widget').first()
+product.price = 120
+session.commit()
 
+for product in products:
+    print(product.name, product.price)
+
+#Deleting a user by id
+user = session.query(User).filter_by(id=1).first()
+
+if user:
+    session.delete(user)
+    session.commit()
+    print(f'User {user.name} deleted')
+else:
+    print('User not found')
+
+##Un comment to add user back in, then re-comment out so you can delete them
+user1 = User(name='Lanae', email='naenae@example.com')
+session.add()
+session.commit()
