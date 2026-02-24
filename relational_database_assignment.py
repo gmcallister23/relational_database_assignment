@@ -53,3 +53,21 @@ class Order(Base):
 Base.metadata.create_all(engine)
 
 session = Session()
+
+user = User(name='Lanae', email='naenae@example.com')
+user = User(name='Riley', email='ridawg@example.com')
+product = Product(name='Ball', price = 50)
+product = Product(name='Claw', price = 150)
+product = Product(name='Widget', price = 100)
+
+user=session.query(User).filter_by(name='Lanae').first
+product = session.query(Product).filter_by(name='Widgety').first
+
+new_order = Order(
+    user = user,
+    product = product,
+    quantity=3,
+    is_shipped=False
+)
+session.add(new_order)
+session.commit()
