@@ -59,9 +59,9 @@ product1 = Product(name='Ball', price = 50)
 product2 = Product(name='Claw', price = 150)
 product3 = Product(name='Widget', price = 100)
 
-#Adds users and products to the database
-session.add_all([user1, user2, product1, product2, product3]) #Must wrap all items in a bracket
-session.commit()
+#Adds users and products to the database -->> comment out after initial commit so you don't duplicate
+# session.add_all([user1, user2, product1, product2, product3]) #Must wrap all items in a bracket
+# session.commit()
 
 order1 = Order(user_id=1, product_id=1, quantity=2, is_shipped=False)
 order2 = Order(user_id=1, product_id=3, quantity=3, is_shipped=True)
