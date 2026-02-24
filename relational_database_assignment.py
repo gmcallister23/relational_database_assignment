@@ -1,10 +1,20 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 
 engine = create_engine('sqlite:///shop.db')
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
+
+#Association table to link relationships
+user_product = Table(
+    'user_product',
+    Base.metadata,
+    Column('user_id', Integer, ForeignKey('user.id'), primary_key=True),
+    Column('product_id', Integer, ForeignKey('products.id'), primary_key=True),
+    Column('quantity', Integer),
+    Column('is_shipped', Boolean, default=False)
+)
 
 class User(Base):
     __tablename__ = 'users'
@@ -14,7 +24,7 @@ class User(Base):
     email = Column(String(200), unique=True, nullable=False)
     
     orders = relationship(
-        'Order', secondary=product_order, back_populates='users'
+        'Order', secondary=user_product, back_populates='users'
     )
 
 class Product(Base):
@@ -27,7 +37,7 @@ class Product(Base):
 
     #Creates a many to many relationship
     orders = relationship(
-        'Order', secondary=product_order, back_populates='products'
+        'Order', secondary=user_product, back_populates='products'
     )
 
 class Order(Base):
@@ -40,10 +50,10 @@ class Order(Base):
     
     #Creates a many to many relationship
     products = relationship(
-        'Product', secondary=product_order, back_populates='orders'
+        'Product', secondary=user_product, back_populates='orders'
         )
     users = relationship(
-        'User', secondary=product_table, back_populates='orders'
+        'User', secondary=user_product, back_populates='orders'
     )
 
 session = Session()
