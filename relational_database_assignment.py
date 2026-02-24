@@ -60,18 +60,19 @@ product2 = Product(name='Claw', price = 150)
 product3 = Product(name='Widget', price = 100)
 
 #Adds users and products to the database
-session.add_all([user1], [user2], [product1], [product2], [product3])
+session.add_all([user1, user2, product1, product2, product3]) #
 session.commit()
 
 # user=session.query(User).filter_by(name='Lanae').first() #not necessary
 # product = session.query(Product).filter_by(name='Widget').first() #not necessary
 
-new_order = Order(
-    user = user1,
-    product = product1,
-    quantity=3,
-    is_shipped=False
-)
+#Not using, there is a simpler but repetitive way to do this
+# new_order = Order(
+#     user = user1,
+#     product = product1,
+#     quantity=3,
+#     is_shipped=False
+# )
 
-session.add(new_order)
-session.commit()
+# session.add(new_order)
+# session.commit()
