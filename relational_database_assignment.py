@@ -1,6 +1,5 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, Table
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, Table 
+from sqlalchemy.orm import sessionmaker, relationship, declarative_base
 
 engine = create_engine('sqlite:///shop.db')
 Base = declarative_base()
@@ -41,8 +40,8 @@ class Order(Base):
     __tablename__= 'orders'
 
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey='users.id')
-    product_id = Column(Integer, ForeignKey='products.id')
+    user_id = Column(Integer, ForeignKey('users.id'))
+    product_id = Column(Integer, ForeignKey('products.id'))
     quantity = Column(Integer, nullable=False)
     is_shipped = Column(Boolean, default=True)
 
