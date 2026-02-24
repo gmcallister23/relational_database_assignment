@@ -32,7 +32,7 @@ class Product(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
     price = Column(Integer, nullable=False)
-    is_shipped = Column(Boolean, default=True)
+    
 
     #Creates a many to many relationship -->> Corrected to one to many, removed secondary=user_product
     orders = relationship('Order', back_populates='products')
@@ -44,6 +44,7 @@ class Order(Base):
     user_id = Column(Integer, ForeignKey='users.id')
     product_id = Column(Integer, ForeignKey='products.id')
     quantity = Column(Integer, nullable=False)
+    is_shipped = Column(Boolean, default=True)
     
     #Creates a many to many relationship -->> Only need a one to many relationship updated to reflect this
     product = relationship('Product', back_populates='orders')
