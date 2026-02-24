@@ -68,8 +68,10 @@ order2 = Order(user_id=1, product_id=3, quantity=3, is_shipped=True)
 order3 = Order(user_id=2, product_id=2, quantity=4, is_shipped=True)
 order4 = Order(user_id=2, product_id=3, quantity=1, is_shipped=True)
 
-session.add_all([order1, order2, order3, order4])
-session.commit()
+#Commented out so it doesn't run again and try to create a duplicate
+# session.add_all([order1, order2, order3, order4])
+# session.commit()
+
 # user=session.query(User).filter_by(name='Lanae').first() #not necessary
 # product = session.query(Product).filter_by(name='Widget').first() #not necessary
 
@@ -83,3 +85,23 @@ session.commit()
 
 # session.add(new_order)
 # session.commit()
+
+#Retreive users and print their information
+
+users = session.query(User).all()
+
+for user in users:
+    print(user.name, user.email)
+
+products = session.query(Product).all()
+
+for product in products:
+    print(product.name, product.price)
+
+orders = session.query(Order).all()
+
+for order in orders:
+    print(order.user.name, order.product.name, order.quantity) #added order.x.x so the statements would print correctly
+
+
+
