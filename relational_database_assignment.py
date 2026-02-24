@@ -53,14 +53,18 @@ Base.metadata.create_all(engine)
 
 session = Session()
 
-user = User(name='Lanae', email='naenae@example.com')
-user = User(name='Riley', email='ridawg@example.com')
-product = Product(name='Ball', price = 50)
-product = Product(name='Claw', price = 150)
-product = Product(name='Widget', price = 100)
+user1 = User(name='Lanae', email='naenae@example.com')
+user2 = User(name='Riley', email='ridawg@example.com')
+product1 = Product(name='Ball', price = 50)
+product2 = Product(name='Claw', price = 150)
+product3 = Product(name='Widget', price = 100)
 
-user=session.query(User).filter_by(name='Lanae').first
-product = session.query(Product).filter_by(name='Widgety').first
+#Adds users and products to the database
+session.add_all([user1], [user2], [product1], [product2], [product3])
+session.commit()
+
+# user=session.query(User).filter_by(name='Lanae').first() #not necessary
+# product = session.query(Product).filter_by(name='Widget').first() #not necessary
 
 new_order = Order(
     user = user,
@@ -68,5 +72,6 @@ new_order = Order(
     quantity=3,
     is_shipped=False
 )
+
 session.add(new_order)
 session.commit()
