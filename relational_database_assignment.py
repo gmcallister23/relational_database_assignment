@@ -60,9 +60,16 @@ product2 = Product(name='Claw', price = 150)
 product3 = Product(name='Widget', price = 100)
 
 #Adds users and products to the database
-session.add_all([user1, user2, product1, product2, product3]) #
+session.add_all([user1, user2, product1, product2, product3]) #Must wrap all items in a bracket
 session.commit()
 
+order1 = Order(user_id=1, product_id=1, quantity=2, is_shipped=False)
+order2 = Order(user_id=1, product_id=3, quantity=3, is_shipped=True)
+order3 = Order(user_id=2, product_id=2, quantity=4, is_shipped=True)
+order4 = Order(user_id=2, product_id=3, quantity=1, is_shipped=True)
+
+session.add_all([order1, order2, order3, order4])
+session.commit()
 # user=session.query(User).filter_by(name='Lanae').first() #not necessary
 # product = session.query(Product).filter_by(name='Widget').first() #not necessary
 
