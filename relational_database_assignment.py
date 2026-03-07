@@ -54,8 +54,6 @@ Base.metadata.create_all(engine)
 
 session = Session()
 
-
-
 user1 = User(name='Lanae', email='naenae@example.com')
 user2 = User(name='Riley', email='ridawg@example.com')
 product1 = Product(name='Ball', price = 50)
