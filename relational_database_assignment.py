@@ -106,6 +106,22 @@ orders = session.query(Order).all()
 for order in orders:
     print(order.user.name, order.product.name, order.quantity) #added order.x.x so the statements would print correctly
 
+#quer for orders that have not been shipped
+print('Unshipped Orders:')
+for order in orders:
+    if not order.is_shipped:
+        print(f'Orders awaiting shipment: {order.user.name}, Product: {order.product.name}, Qty: {order.quantity}')
+
+#Alternate way to query for orders that have not been shipped
+print('Unshipped Orders:')
+unshipped_orders = session.query(Order).filter_by(is_shipped=False).all()
+for orders in unshipped_orders:
+    print(f'Orders awaiting shipment: {orders.user.name}, Product: {orders.product.name}, Qty: {orders.quantity}')
+
+#Count the number of unshipped orders
+unshipped_count = session.query(Order).filter_by(is_shipped=False).count()
+print(f'Total unshipped orders: {unshipped_count}')
+
 #Updating a price - enter a different price each time you run the code
 
 product = session.query(Product).filter_by(name='Widget').first()
@@ -124,6 +140,9 @@ if user:
     print(f'User {user.name} deleted')
 else:
     print('User not found')
+
+
+
 
 # I was trying to figure out how to add a the use back in after I deleted them.  I tried a bunch of different ways,
 # but since the user email was linked to an order and because the table incremented each time, the user wouldn't ever
